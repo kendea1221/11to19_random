@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乱数掛け算</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 0 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+            word-break: break-word;
+        }
+
+        @media (max-width: 480px) {
+            button {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            .result {
+                font-size: 20px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>11～99の乱数掛け算</h1>
+        <h2>Created by K</h2>
+        <button onclick="generateRandomMultiplication()">式を生成</button>
+        <button onclick="showAnswer()" id="answerBtn" disabled>答えを表示</button>
+        <button onclick="reloadPage()">リロード</button>
+        <div class="result" id="problem">ここに式が表示されます</div>
+        <div class="result" id="answer"></div>
+    </div>
+
+    <script>
+        let num1, num2; // グローバル変数で乱数を保持
+
+        function generateRandomMultiplication() {
+            // 11～19の乱数を生成
+            num1 = Math.floor(Math.random() * (99 - 11 + 1)) + 11;
+            num2 = Math.floor(Math.random() * (99 - 11 + 1)) + 11;
+
+            // 式を表示
+            document.getElementById('problem').innerHTML = `${num1} × ${num2}`;
+            document.getElementById('answer').innerHTML = ""; // 答えをクリア
+            document.getElementById('answerBtn').disabled = false; // 答えボタンを有効化
+        }
+
+        function showAnswer() {
+            if (num1 !== undefined && num2 !== undefined) {
+                const result = num1 * num2;
+                document.getElementById('answer').innerHTML = `答え: ${result}`;
+                document.getElementById('answerBtn').disabled = true; // 答えボタンを無効化
+            } else {
+                document.getElementById('answer').innerHTML = "最初に式を生成してください！";
+            }
+        }
+
+        function reloadPage() {
+            location.reload(); // ページをリロード
+        }
+    </script>
+</body>
+</html>
